@@ -32,6 +32,7 @@ generateBtn.addEventListener("click", writePassword);
   var characterArray;
 
   var thePassword;
+  var finalPassword;
 
 // Generate password
 function generatePassword() {
@@ -44,8 +45,8 @@ function generatePassword() {
 
   // Generate password using random letters from the final array
   thePassword = randomPassword();
-  console.log(thePassword);
-  return(thePassword);
+  console.log(finalPassword);
+  return(finalPassword);
 }
 
 function getPasswordLength () {
@@ -108,12 +109,14 @@ function randomPassword() {
 
   // Generate randomn password
   var characterSelect = "";
+  console.log(characterSelect);
   for (var i=0; i<Number(passwordLength); i++) {
     var gtyg = Math.ceil(Math.random()*characterArray.length-1);
     characterSelect = characterSelect+characterArray[gtyg];
   }
   console.log("Final PW: "+characterSelect);
   // Validate password
+
   if (isLowercase == true) {
     var lowerCaseLetters = /[a-z]/g;
     if(characterSelect.match(lowerCaseLetters)) {
@@ -123,18 +126,21 @@ function randomPassword() {
       console.log("doesn't include lowercase");
       thePassword = "";
       randomPassword();
+      return;
     }
-  }
+  };
   if (isUppercase == true) {
     var upperCaseLetters = /[A-Z]/g;
     if(characterSelect.match(upperCaseLetters)) {
       console.log("includes uppercase");
-    } else {
+    }
+    else {
       console.log("doesn't include uppercase");
       thePassword = "";
       randomPassword();
+      return;
     }
-  }
+  };
   if (isNumber == true) {
     var numbers = /[0-9]/g;
     if(characterSelect.match(numbers)) {
@@ -144,8 +150,9 @@ function randomPassword() {
       console.log("doesn't include number");
       thePassword = "";
       randomPassword();
+      return;
     }
-  }
+  };
   if (isSpecial == true) {
     var special = /[!@#$%^&*]/g;
     if(characterSelect.match(special)) {
@@ -155,8 +162,11 @@ function randomPassword() {
       console.log("doesn't include special");
       thePassword = "";
       randomPassword();
+      return;
     }
-  }
+  };
+
   console.log(characterSelect);
+  finalPassword = characterSelect;
   return(characterSelect);
 }
