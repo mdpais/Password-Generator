@@ -45,7 +45,7 @@ function generatePassword() {
 
   // Generate password using random letters from the final array
   thePassword = randomPassword();
-  console.log(finalPassword);
+  // console.log(finalPassword);
   return(finalPassword);
 }
 
@@ -109,21 +109,20 @@ function randomPassword() {
 
   // Generate randomn password
   var characterSelect = "";
-  console.log(characterSelect);
+  // console.log(characterSelect);
   for (var i=0; i<Number(passwordLength); i++) {
-    var gtyg = Math.ceil(Math.random()*characterArray.length-1);
-    characterSelect = characterSelect+characterArray[gtyg];
+    characterSelect = characterSelect+characterArray[Math.ceil(Math.random()*characterArray.length-1)];
   }
-  console.log("Final PW: "+characterSelect);
+  // console.log("Final PW: "+characterSelect);
   // Validate password
 
   if (isLowercase == true) {
     var lowerCaseLetters = /[a-z]/g;
     if(characterSelect.match(lowerCaseLetters)) {
-      console.log("includes lowercase");
+      // console.log("includes lowercase");
     }
     else {
-      console.log("doesn't include lowercase");
+      // console.log("doesn't include lowercase");
       thePassword = "";
       randomPassword();
       return;
@@ -132,10 +131,10 @@ function randomPassword() {
   if (isUppercase == true) {
     var upperCaseLetters = /[A-Z]/g;
     if(characterSelect.match(upperCaseLetters)) {
-      console.log("includes uppercase");
+      // console.log("includes uppercase");
     }
     else {
-      console.log("doesn't include uppercase");
+      // console.log("doesn't include uppercase");
       thePassword = "";
       randomPassword();
       return;
@@ -144,10 +143,10 @@ function randomPassword() {
   if (isNumber == true) {
     var numbers = /[0-9]/g;
     if(characterSelect.match(numbers)) {
-      console.log("includes number");
+      // console.log("includes number");
     }
     else {
-      console.log("doesn't include number");
+      // console.log("doesn't include number");
       thePassword = "";
       randomPassword();
       return;
@@ -156,17 +155,17 @@ function randomPassword() {
   if (isSpecial == true) {
     var special = /[!@#$%^&*]/g;
     if(characterSelect.match(special)) {
-      console.log("includes special");
+      // console.log("includes special");
     }
     else {
-      console.log("doesn't include special");
+      // console.log("doesn't include special");
       thePassword = "";
       randomPassword();
       return;
     }
   };
 
-  console.log(characterSelect);
+  // console.log(characterSelect);
   finalPassword = characterSelect;
   return(characterSelect);
 }
