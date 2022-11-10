@@ -13,9 +13,11 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
  
+// Generate password
 function generatePassword() {
+  // Get password length
   var gamerSelect = prompt("How long do you want your password to be?", "Enter a number between 8 and 128 here");
-  console.log("User selected "+gamerSelect+" characters.");
+  // Validate password length
   if (gamerSelect<8) {
     alert("Password needs to be a minimum of 8 characters.");
     generatePassword();
@@ -25,23 +27,29 @@ function generatePassword() {
     generatePassword();
   }
   else {
+    // Get include lowercase?
     var isLowercase = confirm("Do you want to include lowercase characters");
+    // Get include uppercase?
     var isUppercase = confirm("Do you want to include uppercase characters");
+    // Get include numbers?
     var isNumber = confirm("Do you want to include numbers");
+    // Get include special characters?
     var isSpecial = confirm("Do you want to include special characters");
   }
+  // Create arrays
   let lowerFull = "abcdefghijklmnopqrstuvwxyz";
   var arrayLower = lowerFull.split("");
   let upperFull = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var arrayUpper = upperFull.split("");
   let numberFull = "1234567890";
   var arrayNumber = numberFull.split("");
-  let specialFull = "~!@#$%^&*()_-+=,./\?";
+  // test special characters ~!@#$%^&*()_-+=,./?
+  let specialFull = "!@#$%^&*";
   var arraySpecial = specialFull.split("");
+  // Combine arrays based on user input received
   var startArray = [];
   if (isLowercase == true) {
     startArray = startArray.concat(arrayLower);
-    console.log("Include lowercase characters.");
   }
   else if (isUppercase == false) {
     if (isNumber == false) {
@@ -58,21 +66,71 @@ function generatePassword() {
   }
   if (isUppercase == true) {
     startArray = startArray.concat(arrayUpper);
-    console.log("Include uppercase characters.");
   }
   if (isNumber == true) {
     startArray = startArray.concat(arrayNumber);
-    console.log("Include numbers.");
   }
   if (isSpecial == true) {
     startArray = startArray.concat(arraySpecial);
-    console.log("Include special characters.");
   }
   console.log(startArray);
-  var characterSelect = "";
-  for (var i=0; i<Number(gamerSelect); i++) {
-    characterSelect = characterSelect+startArray[Math.ceil(Math.random()*startArray.length)];
+  // Generate password using random letters from the final array
+  var thePassword = randomPassword();
+  console.log(thePassword);
+  function randomPassword() {
+    var characterSelect = "";
+    for (var i=0; i<Number(gamerSelect); i++) {
+      var gtyg = Math.ceil(Math.random()*startArray.length-1);
+      characterSelect = characterSelect+startArray[gtyg];
+    }
+    console.log("Final PW: "+characterSelect);
+    // Validate password
+    if (isLowercase == true) {
+      var lowerCaseLetters = /[a-z]/g;
+      if(characterSelect.match(lowerCaseLetters)) {
+        console.log("includes lowercase");
+      }
+      else {
+        console.log("doesn't include lowercase");
+        thePassword = "";
+        randomPassword();
+      }
+    }
+    if (isUppercase == true) {
+      var upperCaseLetters = /[A-Z]/g;
+      if(characterSelect.match(upperCaseLetters)) {
+        console.log("includes uppercase");
+      } else {
+        console.log("doesn't include uppercase");
+        thePassword = "";
+        randomPassword();
+      }
+    }
+    if (isNumber == true) {
+      var numbers = /[0-9]/g;
+      if(characterSelect.match(numbers)) {
+        console.log("includes number");
+      }
+      else {
+        console.log("doesn't include number");
+        thePassword = "";
+        randomPassword();
+      }
+    }
+    if (isSpecial == true) {
+      var special = /[!@#$%^&*]/g;
+      if(characterSelect.match(special)) {
+        console.log("includes special");
+      }
+      else {
+        console.log("doesn't include special");
+        thePassword = "";
+        randomPassword();
+      }
+    }
     console.log(characterSelect);
+    return(characterSelect);
   }
-  return(characterSelect);
+  console.log(thePassword);
+  return(thePassword);
 }
